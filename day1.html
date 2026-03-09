@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Day 1</title>
+
+    <style>
+        .main-text{
+            color: red;
+            font-size: larger;
+        }
+    </style>
+
+
+</head>
+<body >
+ <h1 id="MainHeaderID">JavaScript Day 1</h1>
+ <p id="introID"></p>
+ 
+
+ <label for = "viewerName">Enter your name:</label>
+ <input type="text" id="viewerID" name="viewerName"><br><br>
+
+ <button onclick="displayWelcome()">Welcome </button><br><br>
+ <button onclick="resetText()">Reset </button>
+<br><br>
+<script>
+
+
+
+        function displayWelcome(){
+            console.log("Reached display Welcome");
+            
+            // You can get the element by id
+            viewerName = document.getElementById("viewerID").value; // The name entered
+            welcomeMessage = "Welcome " + viewerName + " to JavaScript Day 1!";
+
+            // We make a reference to it if we want to use it more than once    
+            // keyword const means that the reference is valid inside this function only
+            
+            const mainHeader = document.getElementById("MainHeaderID");
+            
+            mainHeader.innerHTML = welcomeMessage;
+            mainHeader.style.color = "blue";    // style = "color: blue; background-color: yellow;"
+            mainHeader.style.backgroundColor = "yellow";
+            
+            
+            // You can also get the element id and change property in one line
+            document.getElementById("introID").innerHTML = "This is the first day of learning JavaScript. We will learn the basics of JavaScript and how to manipulate the DOM."
+
+            // We can style the element by adding a CSS class 
+            document.getElementById("introID").classList.add("main-text");
+          
+        }
+        
+        function resetText(){
+            console.log("Reached resetText");
+            // Reset header back to it orginal text
+            const mainHeader = document.getElementById("MainHeaderID");
+            mainHeader.innerHTML = "JavaScript Day 1";
+            mainHeader.style.color = "black";
+            mainHeader.style.backgroundColor = "white";
+
+            
+            // Reset the intro text and remove the CSS class
+            document.getElementById("introID").innerHTML = "";
+            document.getElementById("introID").classList.remove("main-text");
+            
+            // Clear the input field
+            document.getElementById("viewerID").value = "";
+        }
+</script>
+
+   
+
+</body>
+</html>

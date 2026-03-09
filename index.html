@@ -2,127 +2,179 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JavaScript Day 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Day 1</title>
 
-<style>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #2276d5, #83aae9);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(to right, #2276d5, #83aae9);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 330px;
+        }
 
-.container{
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    text-align: center;
-    width: 330px;
-}
+        h1 {
+            margin-bottom: 20px;
+        }
 
-h1{
-    margin-bottom: 20px;
-}
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
 
-input{
-    width: 80%;
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-button{
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        button:hover {
+            opacity: 0.9;
+        }
 
-button:hover{
-    opacity: 0.9;
-}
+        .welcomeBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-.welcomeBtn{
-    background-color: #4CAF50;
-    color: white;
-}
+        .resetBtn {
+            background-color: #f44336;
+            color: white;
+        }
+        .time {
+            background-color: #e8e23d;
+            color: rgb(48, 5, 5);
+        }
+        .theme {
+            background-color: #441814;
+            color: white;
+        }
 
-.resetBtn{
-    background-color: #f44336;
-    color: white;
-}
+        .main-text {
+            color: #f07604;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
 
-.main-text{
-    color: #f07604;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 20px;
-}
+        .dark-mode {
+            background: linear-gradient(to right, #2d2e2e, #072351);
+            color: rgb(221, 29, 29);
+        }
 
-</style>
+        /* Header animation */
+        .animate-header {
+            animation: popIn 0.6s ease;
+        }
+
+        @keyframes popIn {
+
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 1;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<h1 id="MainHeader">JavaScript Day 1</h1>
+        <h1 id="MainHeader">JavaScript Day 1</h1>
 
-<p id="intro"></p>
 
-<label for="viewerName">Enter Your Name:</label><br>
-<input type="text" id="viewerID" name="viewerName">
+        <p id="intro"></p>
 
-<br>
+        <label for="viewerName">Enter Your Name:</label><br>
+        <input type="text" id="viewerID" name="viewerName">
 
-<button class="welcomeBtn" onclick="displayWelcome()">Welcome</button>
-<button class="resetBtn" onclick="resetText()">Reset</button>
+        <br>
 
-</div>
+        <button class="welcomeBtn" onclick="displayWelcome()">Welcome</button>
+        <button class="resetBtn" onclick="resetText()">Reset</button>
+        <button class="time" onclick="showTime()">Show Time</button>
+        <p id="timeDisplay"></p>
+        <button class="theme" onclick="changeTheme()">Change Theme</button>
+    </div>
 
-<script>
+    <script>
+        function displayWelcome() {
 
-function displayWelcome(){
+            let viewerName = document.getElementById("viewerID").value;
+            let welcomeMessage = "Welcome " + viewerName + " to JavaScript Day 1!";
 
-    let viewerName = document.getElementById("viewerID").value;
-    let welcomeMessage = "Welcome " + viewerName + " to JavaScript Day 1!";
+            const mainHeader = document.getElementById("MainHeader");
+            mainHeader.innerHTML = welcomeMessage;
+            mainHeader.style.color = "#1976d2";
+            mainHeader.style.backgroundColor = "#fff9c4";
 
-    const mainHeader = document.getElementById("MainHeader");
-    mainHeader.innerHTML = welcomeMessage;
-    mainHeader.style.color = "#1976d2";
-    mainHeader.style.backgroundColor = "#fff9c4";
+            /* restart animation */
+            mainHeader.classList.remove("animate-header");
+            void mainHeader.offsetWidth;
+            mainHeader.classList.add("animate-header");
 
-    const intro = document.getElementById("intro");
-    intro.innerHTML = "This is the first day of learning JavaScript. We will learn the basics of JavaScript and how to manipulate the DOM.";
-    intro.classList.add("main-text");
-}
+            const intro = document.getElementById("intro");
+            intro.innerHTML = "This is the first day of learning JavaScript. We will learn the basics of JavaScript and how to manipulate the DOM.";
+            intro.classList.add("main-text");
+        }
 
-function resetText(){
+        function resetText() {
 
-    const mainHeader = document.getElementById("MainHeader");
-    mainHeader.innerHTML = "JavaScript Day 1";
-    mainHeader.style.color = "black";
-    mainHeader.style.backgroundColor = "white";
+            const mainHeader = document.getElementById("MainHeader");
+            mainHeader.innerHTML = "JavaScript Day 1";
+            mainHeader.style.color = "black";
+            mainHeader.style.backgroundColor = "white";
 
-    const intro = document.getElementById("intro");
-    intro.innerHTML = "";
-    intro.classList.remove("main-text");
+            const intro = document.getElementById("intro");
+            intro.innerHTML = "";
+            intro.classList.remove("main-text");
 
-    document.getElementById("viewerID").value = "";
-}
+            document.getElementById("viewerID").value = "";
+            document.getElementById("timeDisplay").value = "";
 
-</script>
+        }
+        function showTime() {
+            const now = new Date;
+            document.getElementById("timeDisplay").innerHTML = now.toLocaleTimeString();
+
+        }
+        function changeTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+    </script>
 
 </body>
+
 </html>
