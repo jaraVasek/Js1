@@ -2,47 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Day 1</title>
-    <style>
-        .main-text {
-            color: green;
-            font-weight: bold;
-            font-size: 18px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Day 1</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 350px;
+}
+
+h1{
+    margin-bottom: 20px;
+}
+
+input{
+    width: 80%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button{
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+.welcomeBtn{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.resetBtn{
+    background-color: #f44336;
+    color: white;
+}
+
+.main-text{
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+</style>
 </head>
 
 <body>
-    <h1 id="MainHeader">JavaScript Day 1</h1>
-    <p id="intro"></p>
-    <button onclick="displayWelcome()">Welcome </button>
-    <button onclick="resetText()">Reset </button>
 
-    <script>
-        function displayWelcome() {
+<div class="container">
 
-            // You can get the element by id
-            // We make a reference to it if we want to use it more than once    
-            mainHeader = document.getElementById("MainHeader");
-            mainHeader.innerHTML = "Welcome to JavaScript Day 1!";
-            mainHeader.style.color = "blue";
-            mainHeader.style.backgroundColor = "yellow";
-            mainHeader.style.color = "red";
-            mainHeader.innerHTML = "Welcome to Day 1 of JavaScript!";
-            // You can also get the element id and change property in one line
-            document.getElementById("intro").innerHTML = "This is the first day of learning JavaScript. We will learn the basics of JavaScript and how to manipulate the DOM."
-            document.getElementById("intro").classList.add("main-text");
-        }
+<h1 id="MainHeader">JavaScript Day 1</h1>
 
+<p id="intro"></p>
 
-        function resetText() {
-            //removes style from CSS main-text
-            document.getElementById("intro").classList.remove("main-text");
+<label for="viewerName">Enter Your Name:</label><br>
+<input type="text" id="viewerID" name="viewerName">
 
-        }
+<br>
 
-    </script>
+<button class="welcomeBtn" onclick="displayWelcome()">Welcome</button>
+<button class="resetBtn" onclick="resetText()">Reset</button>
 
+</div>
+
+<script>
+
+function displayWelcome(){
+
+    let viewerName = document.getElementById("viewerID").value;
+    let welcomeMessage = "Welcome " + viewerName + " to JavaScript Day 1!";
+
+    const mainHeader = document.getElementById("MainHeader");
+    mainHeader.innerHTML = welcomeMessage;
+    mainHeader.style.color = "#1976d2";
+    mainHeader.style.backgroundColor = "#fff9c4";
+
+    const intro = document.getElementById("intro");
+    intro.innerHTML = "This is the first day of learning JavaScript. We will learn the basics of JavaScript and how to manipulate the DOM.";
+    intro.classList.add("main-text");
+}
+
+function resetText(){
+
+    const mainHeader = document.getElementById("MainHeader");
+    mainHeader.innerHTML = "JavaScript Day 1";
+    mainHeader.style.color = "black";
+    mainHeader.style.backgroundColor = "white";
+
+    const intro = document.getElementById("intro");
+    intro.innerHTML = "";
+    intro.classList.remove("main-text");
+
+    document.getElementById("viewerID").value = "";
+}
+
+</script>
+
+</body>
 </html>
